@@ -22,8 +22,8 @@ let redisClient = redis.createClient({
 
 const app = express();
 
-//const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
-const mongoURL = `mongodb://donald:mypassword@mongo:27017/?authSource=admin`;
+const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
+//const mongoURL = `mongodb://donald:mypassword@mongo:27017/?authSource=admin`;
 
 const connectWithRetry = () => {
   mongoose
