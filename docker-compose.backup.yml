@@ -1,0 +1,15 @@
+version: '3' # version
+services: #containers we want to create, each is called a service.
+  node-app: # container name, each container should be on this level
+    build: . # build the image from the docker file in this directory
+    ports: # ports can be a list
+     - "3000:3000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - PORT=3000
+    #env_file:
+     # - ./.env
+
+

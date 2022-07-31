@@ -1,0 +1,16 @@
+version: '3'
+services:
+  nginx:
+    ports:
+      - "80:80"
+  node-app:
+    build:
+      context: . # build location
+      args: # ARGS in docker file 
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production 
+      - MONGO_USER=donald
+      - MONGO_PASSWORD=mypassword 
+    command: node index.js  
+    
