@@ -5,6 +5,9 @@ const {
   MONGO_IP,
   MONGO_PASSWORD,
   MONGO_PORT,
+  REDIS_PORT,
+  REDIS_URL,
+  SESSION_SECRET,
 } = require("./config/config");
 const postRouter = require("./routes/postRoutes");
 const userRouter = require("./routes/userRoutes");
@@ -16,14 +19,14 @@ const redis = require("redis");
 let redisStore = require("connect-redis")(session);
 
 let redisClient = redis.createClient({
-  host: "redis",
-  port: 6379,
+  host: REDIS_URL,
+  port: REDIS_PORT,
 });
 
 const app = express();
 
-//const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
-const mongoURL = `mongodb://donald:mypassword@mongo:27017/?authSource=admin`;
+const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
+// const mongoURL = `mongodb://donald:mypassword@mongo:27017/?authSource=admin`;
 
 const connectWithRetry = () => {
   mongoose
@@ -51,7 +54,7 @@ app.use(cors({})); // allows servers and front end to operate ondifferent domain
 app.use(
   session({
     store: new redisStore({ client: redisClient }),
-    secret: "saveinenv",
+    secret: SESSION_SECRET,
     cookie: {
       secure: false,
       resave: false,
