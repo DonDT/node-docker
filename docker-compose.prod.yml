@@ -4,6 +4,13 @@ services:
     ports:
       - "80:80"
   node-app:
+    deploy: # this config is for swarm
+      replicas: 8
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 2
+        delay: 15s  
     build:
       context: . # build location
       args: # ARGS in docker file 
@@ -18,3 +25,4 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD} 
+
